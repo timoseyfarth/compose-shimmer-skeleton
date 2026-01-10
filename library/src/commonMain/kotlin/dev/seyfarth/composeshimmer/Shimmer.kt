@@ -7,6 +7,7 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -33,8 +34,8 @@ import kotlin.math.sin
 fun Modifier.shimmerEffect(
     visible: Boolean = true,
     shape: Shape = RoundedCornerShape(4.dp),
-    baseColor: Color = Color(0xFFE0E0E0),
-    highlightColor: Color = Color(0xFFF5F5F5),
+    baseColor: Color = Color(0xFF2C2C2C),
+    highlightColor: Color = Color(0xFF3A3A3A),
     durationMillis: Int = 2300,
     widthOfShadowBrush: Dp = 500.dp,
     shimmerTravel: Dp = 300.dp,
@@ -42,8 +43,21 @@ fun Modifier.shimmerEffect(
 ): Modifier = composed {
     if (!visible) return@composed this
 
-    val transparentBaseColor = baseColor.copy(alpha = 0.25f)
-    val transparentHighlightColor = highlightColor.copy(alpha = 0.7f)
+    val isDarkMode = isSystemInDarkTheme()
+
+    val effectiveBaseColor = if (isDarkMode) {
+        Color(0xFFE0E0E0)
+    } else {
+        baseColor
+    }
+    val effectiveHighlightColor = if (isDarkMode) {
+        Color(0xFFF5F5F5)
+    } else {
+        highlightColor
+    }
+
+    val transparentBaseColor = effectiveBaseColor.copy(alpha = 0.25f)
+    val transparentHighlightColor = effectiveHighlightColor.copy(alpha = 0.7f)
 
     val density = LocalDensity.current
     val gradientWidthPx = with(density) { widthOfShadowBrush.toPx() }
