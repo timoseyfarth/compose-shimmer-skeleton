@@ -5,6 +5,10 @@
 
 A **Jetpack Compose** library providing a customizable shimmer effect modifier and predefined skeleton loaders for **Jetpack Compose**, and **Kotlin Multiplatform** (incl. Compose Multiplatform) (Android, iOS, Desktop).
 
+✨ Special about this library: Seamless Global Synchronization: Create a unified loading experience with zero effort. Shimmer effects are automatically coordinated across your entire screen, ensuring animations flow perfectly from left-to-right. Just apply the modifier—the library handles the timing for you. 
+
+Note: Watch the demo below to see global sync in action. Notice how elements on the right side of the screen wait for the shimmer "pulse" to reach them, creating a unified transition.
+
 ![Shimmer Demo Darkmode](https://github.com/user-attachments/assets/0c71f479-a19e-4cdd-b809-6d0a5158974e)
 
 ![Shimmer Demo Lightmode](https://github.com/user-attachments/assets/5ed8b7c3-bad3-4239-8258-39bf98fcef61)
@@ -78,4 +82,5 @@ fun LoadingItem(isLoading: Boolean) {
 - [ ] Add pre-defined skeleton loaders.
 - [ ] Add better Light/Dark theme support.
 - [ ] Add support integrating the shimmer effect better in the individual App's Theme.
+
 
