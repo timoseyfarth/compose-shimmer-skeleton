@@ -1,3 +1,6 @@
+@file:OptIn(ExperimentalWasmDsl::class)
+
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -23,6 +26,13 @@ kotlin {
     iosArm64()
     iosSimulatorArm64()
 
+    wasmJs {
+        browser()
+    }
+    js(IR) {
+        browser()
+    }
+
     sourceSets {
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -45,11 +55,14 @@ android {
 }
 
 mavenPublishing {
+    val currentVersion = project.property("lib.version").toString()
+    val currentGroup = project.property("lib.group").toString()
+
     publishToMavenCentral()
 
     signAllPublications()
 
-    coordinates("dev.seyfarth", "compose-shimmer-skeleton", "1.0.0")
+    coordinates(currentGroup, "compose-shimmer-skeleton", currentVersion)
 
     pom {
         name.set("Compose Shimmer Skeleton")
